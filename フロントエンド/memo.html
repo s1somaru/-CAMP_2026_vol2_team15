@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>メモ - 就活おともアプリ</title>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="memo.css">
+</head>
+<body>
+<div class="mobile-app-container">
+    <div class="character-area">
+        <div class="character-icon">
+            <img src="character.png" alt="メインキャラ" class="char-img">
+        </div>
+        <div class="speech-bubble">
+            <p id="characterMessage">やるべきこと、少しずつ片付けていこうね！</p>
+        </div>
+    </div>
+
+    <header class="app-header">
+        <h1>メモ</h1>
+        <div class="spacer"></div>
+    </header>
+
+    <div class="memo-content">
+        
+        <div class="section-header">
+            <h2 class="section-title">ToDoリスト</h2>
+            <button class="add-text-btn">＋ 追加</button>
+        </div>
+        <div class="todo-card">
+            <label class="todo-item">
+                <input type="checkbox" class="custom-cb">
+                <span class="todo-text">株式会社A ES提出</span>
+            </label>
+            <label class="todo-item">
+                <input type="checkbox" class="custom-cb">
+                <span class="todo-text">B商事 Webテスト受験</span>
+            </label>
+            <label class="todo-item">
+                <input type="checkbox" class="custom-cb">
+                <span class="todo-text">面接の逆質問を考える</span>
+            </label>
+        </div>
+
+        <div class="section-header">
+            <h2 class="section-title">自己PR・ガクチカ</h2>
+            <button class="add-text-btn" id="addPrBtn">＋ 項目を追加</button>
+        </div>
+
+        <div id="prContainer">
+            <div class="pr-card">
+                <input type="text" class="pr-title-input" placeholder="タイトル（例：A社用のガクチカ）">
+                <textarea class="custom-textarea" placeholder="内容を記入"></textarea>
+                <button class="delete-btn">削除</button>
+            </div>
+        </div>
+
+        <button class="save-btn">すべてのメモを保存する</button>
+    </div> <nav class="bottom-nav">
+        <button class="nav-item" onclick="location.href='company-list.html'">企業一覧</button>
+        <button class="nav-item" onclick="location.href='mental-record.html'">メンタル</button>
+        <button class="nav-item active" onclick="location.href='memo.html'">メモ</button>
+    </nav>
+</div>
+</body>
+</html>

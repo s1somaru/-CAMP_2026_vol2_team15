@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企業一覧 - 就活おともアプリ</title>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="company-list.css">
+</head>
+<body>
+<div class="mobile-app-container">
+<div class="character-area">
+<div class="character-icon">
+<img src="character.png" alt="メインキャラ" class="char-img">
+</div>
+<div class="speech-bubble">
+<p id="characterMessage">無理しないで、自分のペースで進もうね！</p>
+</div>
+</div>
+
+<header class="app-header">
+<h1>エントリー企業一覧</h1>
+<button class="add-btn">＋</button>
+</header>
+
+<ul class="company-list">
+<li class="list-item" onclick="location.href='company-detail.html'">
+<div class="company-info">
+<div class="company-name-row">
+<h2>株式会社A（IT・通信）</h2>
+<span class="status-badge unified-blue-green">エントリー済み</span>
+</div>
+<p class="latest-memo">次回：4/25 14:00 オンライン説明会</p>
+</div>
+</li>
+
+<li class="list-item" onclick="location.href='company-detail.html'">
+<div class="company-info">
+<div class="company-name-row">
+<h2>B商事（専門商社）</h2>
+<span class="status-badge unified-blue-green">1次面接待ち</span>
+</div>
+<p class="latest-memo">ES見返す</p>
+</div>
+</li>
+
+<li class="list-item" onclick="location.href='company-detail.html'">
+<div class="company-info">
+<div class="company-name-row">
+<h2>C製薬</h2>
+<span class="status-badge unified-blue-green">最終結果待ち</span>
+</div>
+<p class="latest-memo">面接での手応えあり。結果は1週間後。</p>
+</div>
+</li>
+</ul>
+
+<nav class="bottom-nav">
+<button class="nav-item active">企業一覧</button>
+<button class="nav-item">メンタル</button>
+<button class="nav-item">メモ</button>
+</nav>
+</div>
+</body>
+</html>

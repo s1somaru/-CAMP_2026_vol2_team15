@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企業追加 - 就活おともアプリ</title>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="company-form.css">
+</head>
+<body>
+<div class="mobile-app-container">
+    <header class="app-header">
+        <button class="back-btn" onclick="history.back()">←</button>
+        <h1>企業を追加する</h1>
+        <div class="spacer"></div>
+    </header>
+
+    <div class="form-content">
+        <div class="input-group">
+            <label>企業名</label>
+            <input type="text" placeholder="例：株式会社A">
+        </div>
+
+        <div class="input-group">
+            <label>選考ステータス</label>
+            <select class="custom-select">
+                <option>エントリー済み</option>
+                <option>カジュアル面談済み</option>
+                <option>ES提出完了</option>
+                <option>1次結果待ち</option>
+                <option>2次結果待ち</option>
+                <option>3次結果待ち</option>
+                <option>最終結果待ち</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>一言メモ</label>
+            <textarea placeholder="社風や感じたことを自由にメモ"></textarea>
+        </div>
+
+        <div class="input-grid">
+            <div class="input-group">
+                <label>エントリー日</label>
+                <input type="date">
+            </div>
+            <div class="input-group">
+                <label>ES締め切り</label>
+                <input type="date">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>エントリーしたサイト</label>
+            <input type="text" placeholder="例：マイナビ、直接応募など">
+        </div>
+
+        <div class="input-group">
+            <label>必要書類</label>
+            <input type="text" placeholder="例：履歴書、成績証明書">
+        </div>
+
+        <div class="input-group">
+            <label>面接内容</label>
+            <textarea placeholder="面接の振り返りを記録"></textarea>
+        </div>
+
+        <button class="save-btn">この内容で登録する</button>
+    </div>
+</div>
+</body>
+</html>
