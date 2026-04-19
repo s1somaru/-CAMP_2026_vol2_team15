@@ -1,24 +1,39 @@
 package main
 
 import (
-	"net/http"
-
+	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
+	"go-server/handlers"
+	"go-server/middleware"
 )
 
 func main() {
-	// デフォルトミドルウェア（loggerとrecovery）を含むGinルーターを作成
 	r := gin.Default()
 
-	// シンプルなGETエンドポイントを定義
-	r.GET("/ping", func(c *gin.Context) {
-		// JSONレスポンスを返す
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	// セッションの設定（"secret"はハッカソン用の適当な文字列）
+	store := cookie.NewStore([]byte("secret"))
+	r.Use(sessions.Sessions("mysession", store))
 
-	// ポート8080でサーバーを起動（デフォルト）
-	// サーバーは0.0.0.0:8080でリッスンします（Windowsではlocalhost:8080）
-	r.Run()
+	// CORS設定（フロントのポートに合わせて調整）
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:5500"} // フロントのURL
+	config.AllowCredentials = true
+	r.Use(cors.New(config))
+
+	// 誰でも叩けるAPI
+	r.POST("/api/login", handlers.Login)
+	r.POST("/api/logout", handlers.Logout)
+
+	// ログインが必要なAPIグループ
+	authGroup := r.Group("/api")
+	authGroup.Use(middleware.AuthCheck())
+	{
+		authGroup.GET("/company", func(c *gin.Context) {
+			c.JSON(200, gin.H{"message": "これはログイン中のみ見える企業情報である"})
+		})
+	}
+
+	r.Run(":8080")
 }
