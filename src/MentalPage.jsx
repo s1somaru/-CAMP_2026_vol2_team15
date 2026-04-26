@@ -22,34 +22,38 @@ function MentalPage() {
   }
 
   return (
-    <div>
-      <h1>メンタル記録</h1>
+    <div className="container">
+  <h1>メンタル記録</h1>
 
-      <select value={mood} onChange={(e) => setMood(e.target.value)}>
-        <option value="1">1（最悪）</option>
-        <option value="2">2</option>
-        <option value="3">3（普通）</option>
-        <option value="4">4</option>
-        <option value="5">5（最高）</option>
-      </select>
+  <select value={mood} onChange={(e) => setMood(e.target.value)}>
+    <option value="1">1（最悪）</option>
+    <option value="2">2</option>
+    <option value="3">3（普通）</option>
+    <option value="4">4</option>
+    <option value="5">5（最高）</option>
+  </select>
 
-      <input
-        placeholder="出来事（面接など）"
-        value={event}
-        onChange={(e) => setEvent(e.target.value)}
-      />
+  <input
+    placeholder="出来事（面接など）"
+    value={event}
+    onChange={(e) => setEvent(e.target.value)}
+  />
 
-      <button onClick={addLog}>記録</button>
+  <button onClick={addLog}>記録</button>
 
-      <ul>
-        {logs.map((log, i) => (
-          <li key={i}>
-            {log.date} / 気分:{log.mood} / {log.event}
-          </li>
-        ))}
-      </ul>
-      <MentalChart logs={logs} />
-    </div>
+  <ul>
+    {logs.map((log, i) => (
+      <li key={i}>
+        {log.date} / 気分:{log.mood} / {log.event}
+      </li>
+    ))}
+  </ul>
+
+  
+  <div style={{ width: "80%", margin: "20px auto" }}>
+    <MentalChart logs={logs} />
+  </div>
+</div>
   );
 }
 

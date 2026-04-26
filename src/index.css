@@ -96,11 +96,20 @@ p {
 }
 
 code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+./* 全体 */
+body {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: 400;
+  margin: 0;
+
+  display: flex;
+  justify-content: center;   /* 横中央 */
+  align-items: center;   /* ← 上寄せ */
+
+  min-height: 100vh;         /* ← 超重要 */
+  padding-top: 20px;         /* ← 少し余白 */
+
+  background-color: #726250;
 }
 
 code {
@@ -108,4 +117,63 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+/* 全体 */
+body {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: 400;
+  margin: 0;
+
+  display: flex;
+  justify-content: center;   /* 横中央 */
+  align-items: flex-start;   /* ← 上寄せ */
+
+  min-height: 100vh;         /* ← 超重要 */
+  padding-top: 20px;         /* ← 少し余白 */
+
+  background-color: #726250;
+}
+
+/* アプリ本体 */
+.container {
+  width: 95%;         
+  max-width: 500px;    
+  background: white;
+  padding: 16px;
+  margin: 0 auto;
+  border-radius: 16px;
+}
+
+/* タイトル */
+h1 {
+  text-align: center;
+  color: #4a3f35; /* ブラウン */
+}
+
+/* ボタン */
+button {
+  background-color: #4a3f35;
+  color: white;
+  border: none;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+
+  width: 100%; /* ← 追加！ */
+}
+
+button:hover {
+  opacity: 0.9; /* ← ちょいおしゃれ */
+}
+
+/* 入力欄 */
+input, select {
+  width: 100%;
+  padding: 10px; /* ← 少し増やすと良い */
+  margin-top: 8px;
+  border-radius: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
 }
