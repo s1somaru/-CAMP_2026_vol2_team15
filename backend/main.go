@@ -1,38 +1,42 @@
 package main
 
 import (
+	"go-server/database"
+	"go-server/handlers"
+	//"go-server/middleware"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
-	"go-server/handlers"
-    "go-server/middleware"
 )
 
 func main() {
+	// データベース接続の初期化
+	database.InitDB()
+
 	r := gin.Default()
 
-	// セッションの設定（"secret"はハッカソン用の適当な文字列）
+	// セッションの設定
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
 
-	// CORS設定（フロントのポートに合わせて調整）
+	// CORS設定
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:5500"} // フロントのURL
+	config.AllowOrigins = []string{"http://localhost:5500"}
 	config.AllowCredentials = true
 	r.Use(cors.New(config))
 
-	// 誰でも叩けるAPI
+	// 公開API
 	r.POST("/api/login", handlers.Login)
 	r.POST("/api/logout", handlers.Logout)
 
-	// ログインが必要なAPIグループ
+	// 認証が必要なAPIグループ
 	authGroup := r.Group("/api")
 	authGroup.Use(middleware.AuthCheck())
 	{
-		authGroup.GET("/company", func(c *gin.Context) {
-			c.JSON(200, gin.H{"message": "これはログイン中のみ見える企業情報である"})
-		})
+		// 企業一覧取得API
+		authGroup.GET("/company", handlers.GetCompanies)
 	}
 
 	r.Run(":8080")
