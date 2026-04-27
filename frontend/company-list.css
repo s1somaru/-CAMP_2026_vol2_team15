@@ -1,0 +1,190 @@
+body {
+background-color: #f7f4ef;
+font-family: 'M PLUS Rounded 1c', sans-serif;
+margin: 0;
+display: flex;
+justify-content: center;
+/* スマホで見たときに画面が揺れないようにする設定 */
+overflow-x: hidden;
+}
+
+.mobile-app-container {
+background-color: #fefdfa;
+width: 100%;
+max-width: 400px;
+/* 100vhではなく100dvhにすることで、スマホのメニューバーを回避して完璧に全画面表示にします */
+height: 100dvh;
+box-shadow: 0 8px 30px rgba(120, 105, 90, 0.08);
+display: flex;
+flex-direction: column;
+position: relative;
+overflow: hidden; /* コンテナの外にはみ出したものを隠す */
+}
+
+/* キャラクターエリア */
+.character-area {
+background-color: #f2ebd9;
+padding: 8px 15px; /* 元の15pxから約半分に縮小 */
+display: flex;
+align-items: center;
+border-bottom: 1px dashed #dfd1b8;
+}
+
+.char-img {
+width: 35px; /* 元の50pxから縮小 */
+height: 35px;
+object-fit: contain;
+}
+
+.speech-bubble {
+background-color: #fefdfa;
+padding: 6px 12px; /* 余白を縮小 */
+border-radius: 12px;
+border: 1px solid #dfd1b8;
+flex-grow: 1;
+margin-left: 10px;
+position: relative;
+}
+
+.speech-bubble::before {
+content: '';
+position: absolute;
+left: -8px;
+top: 10px;
+border-top: 8px solid transparent;
+border-bottom: 8px solid transparent;
+border-right: 8px solid #dfd1b8;
+}
+.speech-bubble::after {
+content: '';
+position: absolute;
+left: -6px;
+top: 10px;
+border-top: 8px solid transparent;
+border-bottom: 8px solid transparent;
+border-right: 8px solid #fefdfa;
+}
+
+.speech-bubble p {
+margin: 0;
+font-size: 11px; /* 元の13pxから縮小 */
+color: #4a3f35;
+line-height: 1.3;
+}
+
+/* ヘッダー */
+.app-header {
+background-color: #fefdfa;
+color: #4a3f35;
+padding: 8px 15px; /* 元の15pxから約半分に縮小 */
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid #efeae0;
+}
+
+.app-header h1 {
+font-size: 14px; /* 元の16pxから縮小 */
+margin: 0;
+font-weight: 700;
+letter-spacing: 0.5px;
+}
+
+.add-btn {
+background: none;
+border: none;
+color: #bfa888;
+font-size: 20px;
+cursor: pointer;
+}
+
+/* 企業リスト */
+.company-list {
+list-style: none;
+padding: 0;
+margin: 0;
+flex-grow: 1;
+overflow-y: auto;
+}
+
+.list-item {
+display: flex;
+padding: 10px 15px; /* 元の18pxから大幅に縮小 */
+border-bottom: 1px solid #efeae0;
+cursor: pointer;
+transition: background-color 0.2s;
+}
+
+.list-item:hover {
+background-color: #f7f4ef;
+}
+
+.company-info {
+flex-grow: 1;
+min-width: 0;
+}
+
+.company-name-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 4px; /* 余白を縮小 */
+}
+
+.company-name-row h2 {
+font-size: 13px; /* 元の15pxから縮小 */
+margin: 0;
+color: #4a3f35;
+font-weight: 700;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+/* ステータスバッジ */
+.status-badge.unified-blue-green { 
+background-color: #726250;
+color: #fefdfa;
+display: inline-block;
+width: 85px; /* 幅を縮小 */
+text-align: center;
+padding: 2px 0; /* 上下の余白を縮小 */
+border-radius: 8px;
+font-size: 9px; /* 元の10pxから縮小 */
+white-space: nowrap;
+margin-left: 10px;
+letter-spacing: 0.5px;
+}
+
+.latest-memo {
+margin: 0;
+font-size: 11px; /* 元の12pxから縮小 */
+color: #8c7f72;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+/* 下部ナビゲーション */
+.bottom-nav {
+display: flex;
+background-color: #fefdfa;
+border-top: 1px solid #efeae0;
+}
+
+.nav-item {
+flex: 1;
+background: none;
+border: none;
+padding: 10px 0; /* 元の15pxから縮小 */
+color: #c7bcaf;
+font-size: 11px;
+cursor: pointer;
+font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.nav-item.active {
+color: #4a3f35;
+font-weight: 700;
+border-top: 3px solid #d49a89;
+}

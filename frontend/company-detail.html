@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企業詳細 - 就活おともアプリ</title>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="company-detail.css">
+</head>
+<body>
+<div class="mobile-app-container">
+    <div class="character-area">
+        <div class="character-icon">
+            <img src="character.png" alt="メインキャラ" class="char-img">
+        </div>
+        <div class="speech-bubble">
+            <p id="characterMessage">順調だね！<br>準備、一緒に頑張ろう！</p>
+        </div>
+    </div>
+
+    <header class="app-header">
+<button class="back-btn" onclick="history.back()">←</button>
+<div class="header-title-area">
+<h1>株式会社A（IT・通信）</h1>
+<span class="status-badge unified-blue-green">一次面接待ち</span>
+</div>
+<div class="spacer"></div>
+</header>
+
+    <div class="detail-content">
+        <section class="detail-section">
+            <label>選考進捗状況</label>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 60%;"></div>
+                <div class="progress-labels">
+                    <span>ES</span>
+                    <span>一次</span>
+                    <span>二次</span>
+                    <span>最終</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="info-card">
+            <div class="info-item">
+                <label>一言メモ</label>
+                <p>社員さんの雰囲気がとても温かかった。自分に合ってそう！</p>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>エントリー日</label>
+                    <p>2026/04/01</p>
+                </div>
+                <div class="info-item">
+                    <label>ES締め切り</label>
+                    <p>2026/04/20</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-item">
+                <label>面接内容・聞かれたこと</label>
+                <p>・ガクチカの深掘り<br>・なぜこの業界なのか<br>・逆質問の内容（3つ）</p>
+            </div>
+            <div class="info-item">
+                <label>エントリーしたサイト</label>
+                <p>マイナビ</p>
+            </div>
+            <div class="info-item">
+                <label>必要書類</label>
+                <p>履歴書、成績証明書</p>
+            </div>
+        </div>
+
+        <button class="edit-btn">内容を編集する</button>
+    </div>
+
+    <nav class="bottom-nav">
+        <button class="nav-item active">企業一覧</button>
+        <button class="nav-item">メンタル</button>
+        <button class="nav-item">自己PR</button>
+    </nav>
+</div>
+</body>
+</html>

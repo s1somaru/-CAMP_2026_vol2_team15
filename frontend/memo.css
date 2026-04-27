@@ -1,0 +1,202 @@
+body {
+background-color: #f7f4ef;
+font-family: 'M PLUS Rounded 1c', sans-serif;
+margin: 0;
+display: flex;
+justify-content: center;
+/* スマホで見たときに画面が揺れないようにする設定 */
+overflow-x: hidden;
+}
+
+.mobile-app-container {
+background-color: #fefdfa;
+width: 100%;
+max-width: 400px;
+/* 100vhではなく100dvhにすることで、スマホのメニューバーを回避して完璧に全画面表示にします */
+height: 100dvh;
+box-shadow: 0 8px 30px rgba(120, 105, 90, 0.08);
+display: flex;
+flex-direction: column;
+position: relative;
+overflow: hidden; /* コンテナの外にはみ出したものを隠す */
+}
+
+/* キャラクターエリア・ヘッダー（スリム版を共通使用） */
+.character-area { background-color: #f2ebd9; padding: 8px 15px; display: flex; align-items: center; border-bottom: 1px dashed #dfd1b8; }
+.char-img { width: 35px; height: 35px; object-fit: contain; }
+.speech-bubble { background-color: #fefdfa; padding: 6px 12px; border-radius: 12px; border: 1px solid #dfd1b8; flex-grow: 1; margin-left: 10px; position: relative; }
+.speech-bubble::before { content: ''; position: absolute; left: -8px; top: 10px; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-right: 8px solid #dfd1b8; }
+.speech-bubble::after { content: ''; position: absolute; left: -6px; top: 10px; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-right: 8px solid #fefdfa; }
+.speech-bubble p { margin: 0; font-size: 11px; color: #4a3f35; line-height: 1.3; }
+
+.app-header { background-color: #fefdfa; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #efeae0; }
+.app-header h1 { font-size: 14px; color: #4a3f35; margin: 0; font-weight: 700; }
+.spacer { width: 20px; }
+
+/* コンテンツエリア */
+.memo-content {
+flex-grow: 1;
+overflow-y: auto;
+padding: 15px;
+padding-bottom: 70px; /* ナビゲーションに被らないように */
+}
+
+.section-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 5px;
+margin-bottom: 10px;
+}
+
+.section-title {
+font-size: 14px;
+color: #4a3f35;
+margin: 0;
+font-weight: 700;
+}
+
+/* 追加ボタンのテキストリンク風スタイル */
+.add-text-btn {
+background: none;
+border: none;
+color: #726250;
+font-size: 12px;
+font-weight: 700;
+cursor: pointer;
+font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+/* カード共通スタイル */
+.todo-card, .pr-card {
+background-color: #ffffff;
+border: 1px solid #efeae0;
+border-radius: 12px;
+padding: 15px;
+margin-bottom: 20px;
+box-shadow: 0 4px 10px rgba(120, 105, 90, 0.04);
+}
+
+/* ToDoリストのスタイル */
+.todo-item {
+display: flex;
+align-items: center;
+padding: 10px 0;
+border-bottom: 1px dashed #efeae0;
+cursor: pointer;
+}
+
+.todo-item:last-child {
+border-bottom: none;
+padding-bottom: 0;
+}
+
+/* チェックボックスの色をモダンに（アクセントカラープロパティを使用） */
+.custom-cb {
+accent-color: #726250;
+width: 16px;
+height: 16px;
+margin-right: 12px;
+cursor: pointer;
+}
+
+.todo-text {
+font-size: 13px;
+color: #4a3f35;
+}
+
+/* チェックを入れたら文字に横線を引く */
+.custom-cb:checked + .todo-text {
+text-decoration: line-through;
+color: #c7bcaf;
+}
+
+/* 自己PRの入力スタイル */
+.input-label {
+display: block;
+font-size: 12px;
+color: #726250;
+margin-bottom: 6px;
+font-weight: 700;
+}
+
+.custom-textarea {
+width: 100%;
+height: 90px;
+padding: 10px;
+border: 1px solid #efeae0;
+border-radius: 10px;
+margin-bottom: 15px;
+font-family: 'M PLUS Rounded 1c', sans-serif;
+color: #4a3f35;
+font-size: 13px;
+box-sizing: border-box;
+resize: none;
+}
+
+.custom-textarea:focus {
+outline: none;
+border-color: #dfd1b8;
+}
+
+.save-btn {
+width: 100%;
+padding: 12px;
+background-color: #dfd1b8;
+color: #4a3f35;
+border: none;
+border-radius: 10px;
+font-weight: 700;
+font-size: 14px;
+cursor: pointer;
+box-shadow: 0 2px 6px rgba(223, 209, 184, 0.3);
+}
+
+/* 下部ナビゲーション */
+.bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; display: flex; background-color: #fefdfa; border-top: 1px solid #efeae0; }
+.nav-item { flex: 1; background: none; border: none; padding: 10px 0; color: #c7bcaf; font-size: 11px; cursor: pointer; font-family: 'M PLUS Rounded 1c', sans-serif; }
+.nav-item.active { color: #4a3f35; font-weight: 700; border-top: 3px solid #d49a89; }
+
+.pr-card {
+    background-color: #ffffff;
+    border: 1px solid #efeae0;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(120, 105, 90, 0.04);
+    position: relative;
+}
+
+/* タイトル用の入力欄 */
+.pr-title-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #efeae0;
+    padding: 8px 0;
+    margin-bottom: 10px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #4a3f35;
+    background: transparent;
+}
+
+.pr-title-input:focus {
+    outline: none;
+    border-bottom: 2px solid #dfd1b8;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #c7bcaf;
+    font-size: 11px;
+    cursor: pointer;
+    text-align: right;
+    width: 100%;
+    padding: 5px 0 0;
+}
+
+.delete-btn:hover {
+    color: #d49a89;
+}

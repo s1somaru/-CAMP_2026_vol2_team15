@@ -1,0 +1,100 @@
+body {
+background-color: #f7f4ef;
+font-family: 'M PLUS Rounded 1c', sans-serif;
+margin: 0;
+display: flex;
+justify-content: center;
+overflow-x: hidden;
+}
+
+.mobile-app-container {
+background-color: #fefdfa;
+width: 100%;
+max-width: 400px;
+height: 100dvh; /* スマホ全画面対応 */
+box-shadow: 0 8px 30px rgba(120, 105, 90, 0.08);
+display: flex;
+flex-direction: column;
+position: relative;
+overflow: hidden;
+}
+
+/* ログイン画面の中身を真ん中に配置するための設定 */
+.login-screen {
+justify-content: center;
+align-items: center;
+padding: 20px;
+box-sizing: border-box;
+}
+
+.login-container {
+width: 100%;
+background-color: transparent;
+padding: 20px;
+}
+
+h2 {
+text-align: center;
+color: #4a3f35; /* 焦げ茶色で優しく */
+margin-bottom: 30px;
+font-weight: 700;
+letter-spacing: 1px;
+}
+
+.input-group {
+margin-bottom: 20px;
+}
+
+label {
+display: block;
+font-size: 12px;
+color: #4a3f35;
+margin-bottom: 6px;
+font-weight: 700;
+}
+
+input {
+width: 100%;
+padding: 14px;
+border: 1px solid #efeae0;
+border-radius: 12px;
+background-color: #ffffff;
+color: #4a3f35;
+font-family: 'M PLUS Rounded 1c', sans-serif;
+font-size: 14px;
+box-sizing: border-box;
+transition: border-color 0.3s;
+}
+
+input:focus {
+outline: none;
+border-color: #4a3f35;
+}
+
+.btn {
+width: 100%;
+padding: 15px;
+background-color: #4a3f35;
+color: #FFFF;
+border: none;
+border-radius: 12px;
+font-weight: 700;
+font-size: 16px;
+cursor: pointer;
+font-family: 'M PLUS Rounded 1c', sans-serif;
+transition: background-color 0.3s;
+margin-top: 15px;
+box-shadow: 0 4px 10px rgba(223, 209, 184, 0.3);
+}
+
+.btn:hover {
+background-color: #d4c4a5;
+}
+
+#message {
+text-align: center;
+margin-top: 20px;
+font-size: 13px;
+height: 20px;
+color: #d49a89;
+}
