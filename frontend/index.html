@@ -1,64 +1,28 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>ログイン画面</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ログイン画面 - 就活おともアプリ</title>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="mobile-app-container login-screen">
-    <div class="login-container">
-        <h2>ログイン</h2>
-        <div class="input-group">
-            <label>メールアドレス</label>
-            <input type="email" id="emailInput" placeholder="example@mail.com">
-        </div>
-        <div class="input-group">
-            <label>パスワード</label>
-            <input type="password" id="passwordInput" placeholder="パスワードを入力">
-        </div>
-        <button id="loginButton" class="btn">ログインする</button>
-        <p id="message"></p>
-    </div>
+<div class="login-container">
+<h2>ログイン</h2>
+<div class="input-group">
+<label>メールアドレス</label>
+<input type="email" id="emailInput" placeholder="example@mail.com">
 </div>
-    <script src="main.js"></script>
+<div class="input-group">
+<label>パスワード</label>
+<input type="password" id="passwordInput" placeholder="パスワードを入力">
+</div>
+<button id="loginButton" class="btn">ログインする</button>
+<p id="message"></p>
+</div>
+</div>
+<script src="main.js"></script>
 </body>
 </html>
-
-// ログインボタンが押された時の処理
-document.getElementById('loginButton').addEventListener('click', function() {
-// 1. 画面に入力されたメールアドレスとパスワードを取得
-const emailValue = document.getElementById('emailInput').value;
-const passwordValue = document.getElementById('passwordInput').value;
-
-// 2. バックエンドに送る小包（JSONデータ）を準備
-const sendData = {
-email: emailValue,
-password: passwordValue
-};
-
-// 3. fetchを使って配達員を出発させる
-fetch('http://localhost:8000/api/login', { 
-method: 'POST', // データを「送る」という指定
-headers: {
-'Content-Type': 'application/json' // 「中身はJSON形式ですよ」というお知らせ
-},
-body: JSON.stringify(sendData), // 小包を文字のデータに変換して乗せる
-credentials: 'include' // 【超重要】ログイン成功の証（Cookie）を受け取るための魔法
-})
-.then(response => {
-// 4. バックエンドからの返事（結果）を受け取る
-if (response.ok) {
-// 成功（ログインOK）なら、企業一覧画面へ移動
-location.href = 'company-list.html';
-} else {
-// 失敗（パスワード間違いなど）なら、画面に赤い文字でエラーを出す
-document.getElementById('message').innerText = 'メールアドレスかパスワードが違います';
-}
-})
-.catch(error => {
-// サーバーが落ちているなどの通信エラーが起きた時
-console.error('通信エラー:', error);
-document.getElementById('message').innerText = 'サーバーと通信できませんでした';
-});
-});
