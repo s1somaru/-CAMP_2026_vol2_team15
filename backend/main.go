@@ -6,7 +6,7 @@ import (
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"go-server/handlers"
-	"go-server/middleware"
+    "go-server/middleware"
 )
 
 func main() {
