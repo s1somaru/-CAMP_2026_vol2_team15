@@ -3,7 +3,7 @@ package main
 import (
 	"go-server/database"
 	"go-server/handlers"
-	//"go-server/middleware"
+	"go-server/middleware"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
