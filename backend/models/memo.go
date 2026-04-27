@@ -1,13 +1,17 @@
 package models
 
+import (
+	"gorm.io/gorm"
+)
+
 type Todo struct {
-	Id          int    `json:"id"`
+	gorm.Model
 	TaskName    string `json:"task_name"`
 	IsCompleted bool   `json:"is_completed"`
 }
 
 type Memo struct {
-	Id      int    `json:"id"`
+	gorm.Model
 	Title   string `json:"title"`
 	Content string `json:"content"`
 }
