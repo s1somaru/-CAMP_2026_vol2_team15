@@ -139,3 +139,17 @@ border-radius: 12px;
 font-size: 10px;
 letter-spacing: 0.5px;
 }
+
+.delete-btn-outline {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    border: 1px solid #8f2e14; /* 弁柄色 */
+    color:#8f2e14;
+    border-radius: 12px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+

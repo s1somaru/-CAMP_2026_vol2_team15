@@ -33,9 +33,12 @@
             <div class="progress-container">
                 <div class="progress-bar" style="width: 60%;"></div>
                 <div class="progress-labels">
+                    <span>エントリー</span>
+                    <span>カジュアル面談</span>
                     <span>ES</span>
                     <span>一次</span>
                     <span>二次</span>
+                    <span>三次</span>
                     <span>最終</span>
                 </div>
             </div>
@@ -74,6 +77,8 @@
         </div>
 
         <button class="edit-btn">内容を編集する</button>
+
+        <button class="delete-btn-outline" onclick="confirmDelete()">この企業を削除する</button>
     </div>
 
     <nav class="bottom-nav">
@@ -82,5 +87,17 @@
         <button class="nav-item">自己PR</button>
     </nav>
 </div>
+
+<script>
+function confirmDelete() {
+    const result = confirm("この企業のデータを完全に削除しますか？\n（食べた履歴も消えてしまいます）");
+    if (result) {
+        // ここでバックエンドに削除リクエストを送る処理を将来的に書く
+        alert("削除しました");
+        location.href = 'company-list.html';
+    }
+}
+</script>
+
 </body>
 </html>
