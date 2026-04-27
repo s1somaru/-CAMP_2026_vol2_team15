@@ -1,7 +1,10 @@
 package models
 
+import (
+	"gorm.io/gorm"
+)
 type Company struct {
-	ID                string `json:"id,omitempty"`
+	gorm.Model
 	CompanyName       string `json:"company_name"`
 	Status            string `json:"status"`
 	LatestMemo        string `json:"latest_memo"`
