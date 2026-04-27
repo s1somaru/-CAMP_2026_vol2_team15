@@ -33,7 +33,6 @@ func GetCompanies(c *gin.Context) {
 	// 開発用の仮データ（テストやフロントエンド作業用）
 	mockData := []models.Company{
 		{
-			ID:                "1",
 			CompanyName:       "株式会社A（IT・通信）",
 			Status:            "エントリー済み",
 			LatestMemo:        "次回：4/25 14:00 オンライン説明会",
@@ -60,12 +59,10 @@ func GetAllCompanies(c *gin.Context) {
 	// 開発用の仮データ（複数件の配列にして全て返すよう変更）
 	mockData := []models.Company{
 		{
-			ID:          "1",
 			CompanyName: "株式会社 サンプル1",
 			Status:      "選考中",
 		},
 		{
-			ID:          "2",
 			CompanyName: "株式会社 サンプル2",
 			Status:      "エントリー済み",
 		},
