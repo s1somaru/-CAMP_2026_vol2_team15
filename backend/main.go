@@ -4,6 +4,7 @@ import (
 	"go-server/database"
 	"go-server/handlers"
 	"go-server/middleware"
+	"go-server/models"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
@@ -14,6 +15,12 @@ import (
 func main() {
 	// データベース接続の初期化
 	database.InitDB()
+
+	// ここでテーブルを自動作成・更新する指示を出す
+    err := database.DB.AutoMigrate(&models.Company{})
+    if err != nil {
+        panic("マイグレーションに失敗した: " + err.Error())
+    }
 
 	r := gin.Default()
 
@@ -36,7 +43,7 @@ func main() {
 	authGroup.Use(middleware.AuthCheck())
 	{
 		// 企業一覧取得API
-		authGroup.GET("/company", handlers.GetCompanies)
+		//authGroup.GET("/company", handlers.GetCompanies)
 	}
 
 	r.Run(":8080")
