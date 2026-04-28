@@ -1,0 +1,53 @@
+/* キャラクターと吹き出しの枠組み */
+.global-char-container {
+display: flex;
+flex-direction: row;
+align-items: center;
+/* position: fixed; は削除しました */
+}
+
+/* キャラクターの画像サイズと順番 */
+.global-char-img {
+width: 45px;
+height: 45px;
+object-fit: contain;
+transition: transform 0.3s ease;
+order: 1; 
+}
+
+/* 吹き出しのデザインと順番 */
+.global-speech-bubble {
+background-color: #fefdfa;
+border: 1px solid #dfd1b8;
+padding: 6px 12px;
+border-radius: 12px;
+font-size: 11px;
+color: #4a3f35;
+margin-left: 10px;
+box-shadow: 0 2px 8px rgba(120, 105, 90, 0.1);
+white-space: nowrap;
+order: 2; 
+}
+
+/* 【食べるアニメーション】 */
+.eat-grow-anim {
+animation: eat-and-grow 0.6s ease forwards;
+}
+
+@keyframes eat-and-grow {
+0% { transform: scale(1); }
+50% { transform: scale(1.6); }
+100% { transform: scale(1.2); }
+}
+
+/* レベル表示のデザイン（ヘッダーに収めるよう調整） */
+.global-level-display {
+background-color: #fefdfa;
+border: 2px solid #dfd1b8;
+color: #726250;
+padding: 4px 10px;
+border-radius: 15px;
+font-size: 13px;
+font-weight: 700;
+margin-right: 12px; /* ＋ボタンとの間に隙間を作る */
+}

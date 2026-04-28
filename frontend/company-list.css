@@ -12,7 +12,7 @@ overflow-x: hidden;
 background-color: #fefdfa;
 width: 100%;
 max-width: 400px;
-/* 100vhではなく100dvhにすることで、スマホのメニューバーを回避して完璧に全画面表示にします */
+/* 100vhではなく100dvhにすることで、スマホのメニューバーを回避して完璧に全画面表示にする */
 height: 100dvh;
 box-shadow: 0 8px 30px rgba(120, 105, 90, 0.08);
 display: flex;

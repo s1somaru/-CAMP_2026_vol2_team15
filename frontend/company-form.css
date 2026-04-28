@@ -88,8 +88,8 @@ textarea {
 .save-btn {
     width: 100%;
     padding: 15px;
-    background-color: #dfd1b8; /* メインのベージュ */
-    color: #4a3f35;
+    background-color: #4a3f35;
+    color: #FFFF;
     border: none;
     border-radius: 15px;
     font-weight: 700;

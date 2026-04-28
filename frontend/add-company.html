@@ -3,34 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>企業追加 - 就活おともアプリ</title>
+<title>企業追加・編集 - 就活バイタル</title>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="company-form.css">
-<link rel="stylesheet" href="character.css">
 </head>
 <body>
 <div class="mobile-app-container">
-<div class="global-char-container">
-<div class="global-speech-bubble">
-<span id="globalMessageText">今日もえらい！</span>
-</div>
-<img src="character.png" class="global-char-img" id="globalCharImg">
-</div>
-
-<div class="global-level-display">
-Lv. <span id="levelNumber">0</span>
-</div>
 
 <header class="app-header">
 <button class="back-btn" onclick="history.back()">←</button>
-<h1>企業を追加する</h1>
+<h1 id="pageTitle">企業を追加する</h1>
 <div class="spacer"></div>
 </header>
 
 <div class="form-content">
 <div class="input-group">
 <label>企業名</label>
-<input type="text" placeholder="例：株式会社A">
+<input type="text" id="inputName" placeholder="例：株式会社A">
 </div>
 
 <div class="input-group">
@@ -43,44 +32,118 @@ Lv. <span id="levelNumber">0</span>
 <option>2次結果待ち</option>
 <option>3次結果待ち</option>
 <option>最終結果待ち</option>
+<option>内定</option>
 <option>不合格</option>
 </select>
 </div>
 
 <div class="input-group">
 <label>一言メモ</label>
-<textarea placeholder="社風や感じたことを自由にメモ"></textarea>
+<textarea id="inputMemo" placeholder="社風や感じたことを自由にメモ"></textarea>
 </div>
 
 <div class="input-grid">
 <div class="input-group">
 <label>エントリー日</label>
-<input type="date">
+<input type="date" id="inputEntryDate">
 </div>
 <div class="input-group">
 <label>ES締め切り</label>
-<input type="date">
+<input type="date" id="inputEsDate">
 </div>
 </div>
-
 <div class="input-group">
 <label>エントリーしたサイト</label>
-<input type="text" placeholder="例：マイナビ、直接応募など">
+<input type="text" id="inputSite" placeholder="例：マイナビなど">
 </div>
-
 <div class="input-group">
 <label>必要書類</label>
-<input type="text" placeholder="例：履歴書、成績証明書">
+<input type="text" id="inputDocs" placeholder="例：履歴書">
 </div>
-
 <div class="input-group">
 <label>面接内容</label>
-<textarea placeholder="面接の振り返りを記録"></textarea>
+<textarea id="inputInterview" placeholder="面接の振り返りを記録"></textarea>
 </div>
 
-<button class="save-btn" onclick="location.href='company-list.html'">この内容で登録する</button>
+<button class="save-btn" onclick="saveAndTriggerEat()">この内容で保存する</button>
 </div>
 </div>
-<script src="character.js"></script>
+
+<script>
+let editId = null;
+
+window.onload = function() {
+    editId = localStorage.getItem('targetCompanyId');
+    if (editId) {
+        document.getElementById('pageTitle').innerText = "企業を編集する";
+        const companies = JSON.parse(localStorage.getItem('myCompanies')) || [];
+        const target = companies.find(c => c.id == editId);
+        if(target) {
+            document.getElementById('inputName').value = target.name || "";
+            document.getElementById('statusSelect').value = target.status || "エントリー済み";
+            document.getElementById('inputMemo').value = target.memo || "";
+            document.getElementById('inputEntryDate').value = target.entryDate || "";
+            document.getElementById('inputEsDate').value = target.esDate || "";
+            document.getElementById('inputSite').value = target.site || "";
+            document.getElementById('inputDocs').value = target.docs || "";
+            document.getElementById('inputInterview').value = target.interview || "";
+        }
+    }
+};
+
+function saveAndTriggerEat() {
+    const name = document.getElementById('inputName').value || "未入力の企業";
+    const status = document.getElementById('statusSelect').value;
+    const memo = document.getElementById('inputMemo').value || "メモなし";
+    const entryDate = document.getElementById('inputEntryDate').value;
+    const esDate = document.getElementById('inputEsDate').value;
+    const site = document.getElementById('inputSite').value;
+    const docs = document.getElementById('inputDocs').value;
+    const interview = document.getElementById('inputInterview').value;
+
+    let companies = JSON.parse(localStorage.getItem('myCompanies')) || [];
+
+    if (editId) {
+        const targetIndex = companies.findIndex(c => c.id == editId);
+        if(targetIndex !== -1) {
+            companies[targetIndex].name = name;
+            companies[targetIndex].status = status;
+            companies[targetIndex].memo = memo;
+            companies[targetIndex].entryDate = entryDate;
+            companies[targetIndex].esDate = esDate;
+            companies[targetIndex].site = site;
+            companies[targetIndex].docs = docs;
+            companies[targetIndex].interview = interview;
+        }
+    } else {
+        const newCompany = {
+            id: Date.now(),
+            name: name,
+            status: status,
+            memo: memo,
+            entryDate: entryDate,
+            esDate: esDate,
+            site: site,
+            docs: docs,
+            interview: interview
+        };
+        companies.unshift(newCompany); 
+    }
+
+    localStorage.setItem('myCompanies', JSON.stringify(companies));
+    localStorage.removeItem('targetCompanyId'); 
+
+    localStorage.setItem('mockCompanyStatus', status);
+    
+    // 【重要】不合格なら食べるフラグ、内定ならお祝いフラグを立てる
+    if (status.includes('不合格')) {
+        localStorage.setItem('triggerEat', 'true');
+    } else if (status.includes('内定')) {
+        localStorage.setItem('triggerCelebrate', 'true');
+    }
+
+    location.href = 'company-list.html';
+}
+</script>
 </body>
 </html>

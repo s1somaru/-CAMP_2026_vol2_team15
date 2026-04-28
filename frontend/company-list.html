@@ -3,63 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>企業一覧 - 就活おともアプリ</title>
+<title>企業一覧 - 就活バイタル</title>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="company-list.css">
+<link rel="stylesheet" href="character.css">
 </head>
 <body>
 <div class="mobile-app-container">
-<div class="character-area">
-<div class="character-icon">
-<img src="character.png" alt="メインキャラ" class="char-img">
-</div>
-<div class="speech-bubble">
-<p id="characterMessage">無理しないで、自分のペースで進もうね！</p>
-</div>
-</div>
 
 <header class="app-header">
-<h1>エントリー企業一覧</h1>
-<button class="add-btn">＋</button>
+<div class="global-char-container">
+<img src="character.png" class="global-char-img" id="globalCharImg">
+<div class="global-speech-bubble">
+<span id="globalMessageText">今日もえらい！</span>
+</div>
+</div>
+
+<div style="display: flex; align-items: center;">
+<div class="global-level-display">
+Lv. <span id="levelNumber">0</span>
+</div>
+<button class="add-btn" onclick="localStorage.removeItem('targetCompanyId'); location.href='add-company.html'">＋</button>
+</div>
 </header>
 
-<ul class="company-list">
-<li class="list-item" onclick="location.href='company-detail.html'">
-<div class="company-info">
-<div class="company-name-row">
-<h2>株式会社A（IT・通信）</h2>
-<span class="status-badge unified-blue-green">エントリー済み</span>
-</div>
-<p class="latest-memo">次回：4/25 14:00 オンライン説明会</p>
-</div>
-</li>
-
-<li class="list-item" onclick="location.href='company-detail.html'">
-<div class="company-info">
-<div class="company-name-row">
-<h2>B商事（専門商社）</h2>
-<span class="status-badge unified-blue-green">1次面接待ち</span>
-</div>
-<p class="latest-memo">ES見返す</p>
-</div>
-</li>
-
-<li class="list-item" onclick="location.href='company-detail.html'">
-<div class="company-info">
-<div class="company-name-row">
-<h2>C製薬</h2>
-<span class="status-badge unified-blue-green">最終結果待ち</span>
-</div>
-<p class="latest-memo">面接での手応えあり。結果は1週間後。</p>
-</div>
-</li>
-</ul>
+<ul class="company-list" id="companyList"></ul>
 
 <nav class="bottom-nav">
 <button class="nav-item active">企業一覧</button>
-<button class="nav-item">メンタル</button>
-<button class="nav-item">メモ</button>
+<button class="nav-item" onclick="location.href='mental.html'">メンタル</button>
+<button class="nav-item" onclick="location.href='memo.html'">メモ</button>
 </nav>
 </div>
+
+<script>
+// アプリ起動時にリストを生成する
+window.addEventListener('DOMContentLoaded', () => {
+    // 最初のデモ用データ
+    const defaultData = [
+        { id: 1, name: "株式会社A（IT・通信）", status: "エントリー済み", memo: "次回：4/25 14:00 オンライン説明会" },
+        { id: 2, name: "B商事（専門商社）", status: "1次面接待ち", memo: "ES見返す" },
+        { id: 3, name: "C製薬", status: "最終結果待ち", memo: "面接での手応えあり。結果は1週間後。" }
+    ];
+
+    // ブラウザの記憶から企業リストを呼び出す（初めてならデモデータを入れる）
+    let companies = JSON.parse(localStorage.getItem('myCompanies'));
+    if (!companies || companies.length === 0) {
+        companies = defaultData;
+        localStorage.setItem('myCompanies', JSON.stringify(companies));
+    }
+
+    const listContainer = document.getElementById('companyList');
+    listContainer.innerHTML = ''; 
+
+    // 記憶の中の企業を1つずつHTMLに変換して並べる
+    companies.forEach(company => {
+        const li = document.createElement('li');
+        li.className = 'list-item';
+        // クリックした企業のIDを記憶して、詳細画面へ飛ぶ
+        li.onclick = () => {
+            localStorage.setItem('targetCompanyId', company.id);
+            location.href = 'company-detail.html';
+        };
+
+        li.innerHTML = `
+        <div class="company-info">
+            <div class="company-name-row">
+                <h2>${company.name}</h2>
+                <span class="status-badge unified-blue-green">${company.status}</span>
+            </div>
+            <p class="latest-memo">${company.memo}</p>
+        </div>
+        `;
+        listContainer.appendChild(li);
+    });
+});
+</script>
+<script src="character.js"></script>
 </body>
 </html>
