@@ -1,24 +1,50 @@
 package main
 
 import (
-	"net/http"
+	"go-server/database"
+	"go-server/handlers"
+	"go-server/middleware"
+	"go-server/models"
 
+	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// デフォルトミドルウェア（loggerとrecovery）を含むGinルーターを作成
+	// データベース接続の初期化
+	database.InitDB()
+
+	// ここでテーブルを自動作成・更新する指示を出す
+    err := database.DB.AutoMigrate(&models.Company{})
+    if err != nil {
+        panic("マイグレーションに失敗した: " + err.Error())
+    }
+
 	r := gin.Default()
 
-	// シンプルなGETエンドポイントを定義
-	r.GET("/ping", func(c *gin.Context) {
-		// JSONレスポンスを返す
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	// セッションの設定
+	store := cookie.NewStore([]byte("secret"))
+	r.Use(sessions.Sessions("mysession", store))
 
-	// ポート8080でサーバーを起動（デフォルト）
-	// サーバーは0.0.0.0:8080でリッスンします（Windowsではlocalhost:8080）
-	r.Run()
+	// CORS設定
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:5500"}
+	config.AllowCredentials = true
+	r.Use(cors.New(config))
+
+	// 公開API
+	r.POST("/api/login", handlers.Login)
+	r.POST("/api/logout", handlers.Logout)
+
+	// 認証が必要なAPIグループ
+	authGroup := r.Group("/api")
+	authGroup.Use(middleware.AuthCheck())
+	{
+		// 企業一覧取得API
+		//authGroup.GET("/company", handlers.GetCompanies)
+	}
+
+	r.Run(":8080")
 }

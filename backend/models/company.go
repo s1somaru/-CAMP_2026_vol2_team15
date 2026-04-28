@@ -5,7 +5,7 @@ import (
 )
 
 type Company struct {
-	gorm.Model               `json:"id,omitempty"`
+	gorm.Model        `json:"id,omitempty"`
 	CompanyName       string `json:"company_name"`
 	Status            string `json:"status"`
 	LatestMemo        string `json:"latest_memo"`
