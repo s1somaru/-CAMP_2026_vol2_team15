@@ -19,15 +19,14 @@
 </div>
 </div>
 
-<div style="display: flex; align-items: center;">
-<div class="global-level-display">
+<div class="global-level-display" style="margin-right: 0;">
 Lv. <span id="levelNumber">0</span>
-</div>
-<button class="add-btn" onclick="localStorage.removeItem('targetCompanyId'); location.href='add-company.html'">＋</button>
 </div>
 </header>
 
 <ul class="company-list" id="companyList"></ul>
+
+<button class="fab-add-btn" onclick="localStorage.removeItem('targetCompanyId'); location.href='add-company.html'">＋</button>
 
 <nav class="bottom-nav">
 <button class="nav-item active">企業一覧</button>
@@ -37,16 +36,13 @@ Lv. <span id="levelNumber">0</span>
 </div>
 
 <script>
-// アプリ起動時にリストを生成する
 window.addEventListener('DOMContentLoaded', () => {
-    // 最初のデモ用データ
     const defaultData = [
         { id: 1, name: "株式会社A（IT・通信）", status: "エントリー済み", memo: "次回：4/25 14:00 オンライン説明会" },
         { id: 2, name: "B商事（専門商社）", status: "1次面接待ち", memo: "ES見返す" },
         { id: 3, name: "C製薬", status: "最終結果待ち", memo: "面接での手応えあり。結果は1週間後。" }
     ];
 
-    // ブラウザの記憶から企業リストを呼び出す（初めてならデモデータを入れる）
     let companies = JSON.parse(localStorage.getItem('myCompanies'));
     if (!companies || companies.length === 0) {
         companies = defaultData;
@@ -56,11 +52,9 @@ window.addEventListener('DOMContentLoaded', () => {
     const listContainer = document.getElementById('companyList');
     listContainer.innerHTML = ''; 
 
-    // 記憶の中の企業を1つずつHTMLに変換して並べる
     companies.forEach(company => {
         const li = document.createElement('li');
         li.className = 'list-item';
-        // クリックした企業のIDを記憶して、詳細画面へ飛ぶ
         li.onclick = () => {
             localStorage.setItem('targetCompanyId', company.id);
             location.href = 'company-detail.html';

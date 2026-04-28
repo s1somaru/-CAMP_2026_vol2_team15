@@ -188,3 +188,30 @@ color: #4a3f35;
 font-weight: 700;
 border-top: 3px solid #d49a89;
 }
+
+/* 右下に浮かぶ追加ボタン（FAB） */
+.fab-add-btn {
+    position: absolute;
+    bottom: 80px; /* ナビゲーションバーのすぐ上に浮かせる */
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    background-color: #4a3f35; /* 登録ボタンと同じ濃い茶色 */
+    color: #fefdfa;
+    border: none;
+    border-radius: 50%;
+    font-size: 28px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(120, 105, 90, 0.4);
+    cursor: pointer;
+    z-index: 100; /* 企業のリストよりも上に表示する */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+/* ボタンを押したくなるように、ホバー時に少しだけ大きくなる */
+.fab-add-btn:hover {
+    transform: scale(1.05);
+}
