@@ -19,8 +19,9 @@ func CreateCompany(c *gin.Context) {
 	}
 
 	//  req のデータを repository を通じてデータベース（DB）に保存する処理
-	if err := database.DB.Create(&req).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "企業情報の保存に失敗しました: " + err.Error()})
+	err := database.DB.Create(&req).Error
+	if HandleDBError(c, err) {
+		return
 	}
 	// 受け取ったデータをそのままレスポンスとして返して成功を確認
 	c.JSON(http.StatusCreated, gin.H{
@@ -33,8 +34,8 @@ func CreateCompany(c *gin.Context) {
 func GetCompanies(c *gin.Context) {
 	// データベース（DB）から企業一覧を取得する処理
 	var companies []models.Company
-	if err := database.DB.Find(&companies).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "企業情報の取得に失敗しました: " + err.Error()})
+	err := database.DB.Find(&companies).Error
+	if HandleDBError(c, err) {
 		return
 	}
 	// 開発用の仮データ（テストやフロントエンド作業用）
@@ -62,10 +63,8 @@ func GetCompanies(c *gin.Context) {
 // GetCompaniesByID は使わず、一覧すべてを取得するAPIとして変更
 func GetAllCompanies(c *gin.Context) {
 	// repository を通じてデータベース（DB）から企業一覧を全て取得する処理
-	if err := database.DB.Find(&[]models.Company{}).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "企業の一覧の取得に失敗しました: " + err.Error(),
-		})
+	err := database.DB.Find(&[]models.Company{}).Error
+	if HandleDBError(c, err) {
 		return
 	}
 	// 開発用の仮データ（複数件の配列にして全て返すよう変更）
@@ -90,10 +89,8 @@ func GetCompanyByID(c *gin.Context) {
 	id := c.Param("id")
 
 	var company models.Company
-	if err := database.DB.First(&company, id).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "企業の取得に失敗しました: " + err.Error(),
-		})
+	err := database.DB.First(&company, id).Error
+	if HandleDBError(c, err) {
 		return
 	}
 	//特定の企業の情報の取得に成功
