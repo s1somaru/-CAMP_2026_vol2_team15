@@ -17,10 +17,10 @@ func main() {
 	database.InitDB()
 
 	// ここでテーブルを自動作成・更新する指示を出す
-    err := database.DB.AutoMigrate(&models.Company{})
-    if err != nil {
-        panic("マイグレーションに失敗した: " + err.Error())
-    }
+	err := database.DB.AutoMigrate(&models.Company{})
+	if err != nil {
+		panic("マイグレーションに失敗した: " + err.Error())
+	}
 
 	r := gin.Default()
 
@@ -44,6 +44,8 @@ func main() {
 	{
 		// 企業一覧取得API
 		//authGroup.GET("/company", handlers.GetCompanies)
+		// 企業情報登録API
+		//authGroup.POST("/company", handlers.CreateCompany)
 	}
 
 	r.Run(":8080")

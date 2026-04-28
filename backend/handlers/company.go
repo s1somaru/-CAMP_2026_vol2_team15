@@ -1,10 +1,12 @@
 package handlers
 
 import (
-	"go-server/models" // プロジェクトのモジュール名（go-server/models）に合わせてください
+	"go-server/database" // データベース操作用のパッケージ（後で作成する予定）
+	"go-server/models"   // プロジェクトのモジュール名（go-server/models）に合わせてください
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	// GORMを使用する場合
 )
 
 // CreateCompany は新しい企業情報を登録するAPIです
@@ -18,7 +20,9 @@ func CreateCompany(c *gin.Context) {
 	}
 
 	// TODO: ここで req のデータを repository を通じてデータベース（DB）に保存する処理を書きます
-
+	if err := database.DB.Create(&req).Error; err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": "企業情報の保存に失敗しました: " + err.Error()})
+	}
 	// 一旦、受け取ったデータをそのままレスポンスとして返して成功を確認できるようにします
 	c.JSON(http.StatusCreated, gin.H{
 		"message": "企業情報の登録に成功しました",
@@ -29,7 +33,11 @@ func CreateCompany(c *gin.Context) {
 // GetCompanies は登録されているすべての企業情報を取得するAPIです
 func GetCompanies(c *gin.Context) {
 	// TODO: repository を通じてデータベース（DB）から企業一覧を取得する処理を書きます
-
+	var companies []models.Company
+	if err := database.DB.Find(&companies).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "企業情報の取得に失敗しました: " + err.Error()})
+		return
+	}
 	// 開発用の仮データ（テストやフロントエンド作業用）
 	mockData := []models.Company{
 		{
