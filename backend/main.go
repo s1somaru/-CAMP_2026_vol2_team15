@@ -10,18 +10,26 @@ import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
+	"fmt"
 )
 
 func main() {
-	// データベース接続の初期化
+// 1. データベース接続の初期化
 	database.InitDB()
 
-	// ここでテーブルを自動作成・更新する指示を出す
-    err := database.DB.AutoMigrate(&models.Company{})
-    if err != nil {
-        panic("マイグレーションに失敗した: " + err.Error())
-    }
+	// 2. マイグレーションの実行
+	// 作成した3つのモデルをデータベースに反映させる
+	err := database.DB.AutoMigrate(
+		&models.User{},
+		&models.Company{},
+		&models.Memo{},
+	)
+	if err != nil {
+		panic("マイグレーションに失敗した: " + err.Error())
+	}
+	fmt.Println("マイグレーションが完了した")
 
+	// 3. Ginルーターの設定
 	r := gin.Default()
 
 	// セッションの設定
