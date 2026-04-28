@@ -22,17 +22,20 @@ func main() {
 	config.AllowCredentials = true
 	r.Use(cors.New(config))
 
-	// 誰でも叩けるAPI
-	r.POST("/api/login", handlers.Login)
-	r.POST("/api/logout", handlers.Logout)
-
-	// ログインが必要なAPIグループ
-	authGroup := r.Group("/api")
-	authGroup.Use(middleware.AuthCheck())
+	// --- 公開API ---
+	public := r.Group("/api")
 	{
-		authGroup.GET("/company", func(c *gin.Context) {
-			c.JSON(200, gin.H{"message": "これはログイン中のみ見える企業情報である"})
-		})
+	    public.POST("/signup", handlers.Signup)
+	    public.POST("/login", handlers.Login)
+	}
+	
+	// --- 保護API（AuthCheckを適用） ---
+	protected := r.Group("/api")
+	protected.Use(middleware.AuthCheck())
+	{
+	    protected.POST("/logout", handlers.Logout) // ここに入れる
+	    protected.GET("/companies", handlers.GetCompanies)
+	    protected.POST("/companies", handlers.CreateCompany)
 	}
 
 	r.Run(":8080")
